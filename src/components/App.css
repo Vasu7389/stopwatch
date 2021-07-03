@@ -1,0 +1,53 @@
+:root {
+  --shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.clock {
+  width: 200px;
+  height: 200px;
+  font-size: 2rem;
+  font-weight: 500;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow);
+  margin: 10px;
+  flex-direction: column;
+  position: relative;
+}
+
+.flagIcon {
+  position: absolute;
+  bottom: 15px;
+  transform: rotate(340deg);
+  font-size: 1.5rem;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin: 25px 0px;
+}
+
+.buttons {
+  box-shadow: var(--shadow);
+  padding: 10px 25px;
+  border-radius: 7px;
+  font-weight: 500;
+}
+
+.buttons:hover {
+  box-shadow: rgb(0 0 0 / 45%) 0px 5px 15px;
+}
