@@ -1,53 +1,30 @@
-:root {
-  --shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-}
-
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100vw;
+  max-width: 300px;
 }
 
-.clock {
-  width: 200px;
-  height: 200px;
-  font-size: 2rem;
-  font-weight: 500;
-  border-radius: 50%;
+.container {
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow);
-  margin: 10px;
   flex-direction: column;
-  position: relative;
+  width: 100%;
 }
 
-.flagIcon {
-  position: absolute;
-  bottom: 15px;
-  transform: rotate(340deg);
-  font-size: 1.5rem;
-  font-weight: 100;
-  cursor: pointer;
-}
-
-.button-row {
+.header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: row;
-  margin: 25px 0px;
-}
-
-.buttons {
-  box-shadow: var(--shadow);
-  padding: 10px 25px;
-  border-radius: 7px;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  font-size: 1.3rem;
   font-weight: 500;
-}
-
-.buttons:hover {
-  box-shadow: rgb(0 0 0 / 45%) 0px 5px 15px;
+  height: 10vh;
+  border-bottom: 0.1rem solid rgba(128, 128, 128, 0.356);
 }
