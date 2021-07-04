@@ -4,55 +4,38 @@ import "./Stopwatch.css";
 
 const Stopwatch = () => {
   const [isStarted, setIsStarted] = useState(false);
-  const [millisecond, setMilliSecond] = useState(0);
-  const [msInterval, setMsInterval] = useState();
-  const [second, setSecond] = useState(0);
-  const [minute, setMinute] = useState(0);
+  const [[h, m, s], setTimer] = useState([0, 0, 0]);
   const [laps, setLaps] = useState([{}]);
 
   useEffect(() => {
-    if (millisecond === 100) {
-      setSecond(second + 1);
-      setMilliSecond(0);
-    }
-    if (second === 60) {
-      setMinute(minute + 1);
-      setSecond(0);
-    }
-  }, [second, minute, millisecond]);
+    const timerId = setInterval(() => onStart(), 1000);
+    return () => clearInterval(timerId);
+  });
 
   const onStart = () => {
-    setIsStarted(true);
-    setMsInterval(
-      setInterval(() => {
-        setMilliSecond((millisecond) => millisecond + 1);
-      }, 10)
-    );
+    if (!isStarted) return;
+    if (m === 60 && s === 60) {
+      setTimer([h + 1, 0, 0]);
+    } else if (s === 60) {
+      setTimer([h, m + 1, 0]);
+    } else {
+      setTimer([h, m, s + 1]);
+    }
   };
 
   const onPause = () => {
-    clearInterval(msInterval);
     setIsStarted(false);
   };
 
   const onReset = () => {
-    setMilliSecond(0);
-    setSecond(0);
-    setMinute(0);
+    setIsStarted(false);
+    setTimer([0, 0, 0]);
   };
 
   const onLapClick = () => {
     let temp = [...laps];
     const lastSplitTime = temp[temp.length - 1].splitTime;
-    const splitTime = new Date(
-      0,
-      0,
-      0,
-      0,
-      minute,
-      second,
-      millisecond
-    ).toTimeString();
+    const splitTime = new Date(0, 0, 0, 0).toTimeString();
     const lapTime = Math.abs(new Date(splitTime) - new Date(lastSplitTime));
     console.log(lapTime);
     temp.push({
@@ -66,7 +49,7 @@ const Stopwatch = () => {
     <div className="stopwatch">
       <div className="container">
         <div className="clock">
-          {minute}:{second}:{millisecond}
+          {h}:{m}:{s}
           <i className="fas fa-flag flagIcon" onClick={onLapClick}></i>
         </div>
         <div className="button-row">
@@ -74,7 +57,7 @@ const Stopwatch = () => {
           {isStarted ? (
             <Button onClickHandler={onPause}>Pause</Button>
           ) : (
-            <Button onClickHandler={onStart}>Start</Button>
+            <Button onClickHandler={() => setIsStarted(true)}>Start</Button>
           )}
         </div>
         {laps &&
