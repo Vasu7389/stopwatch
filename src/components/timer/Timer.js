@@ -35,24 +35,38 @@ const Timer = () => {
 
   return (
     <div className="timer">
-      <input
-        type="text"
-        className="timer-input"
-        value={h}
-        onChange={(e) => setTimer([e.target.value, m, s])}
-      />
-      <input
-        type="text"
-        className="timer-input"
-        value={m}
-        onChange={(e) => setTimer([h, e.target.value, s])}
-      />
-      <input
-        type="text"
-        className="timer-input"
-        value={s}
-        onChange={(e) => setTimer([h, m, e.target.value])}
-      />
+      <div className="timer-row">
+        <div className="timer-border-ring">
+          <div className="timer-border-ring-inner"></div>
+        </div>
+        <div className="timer-input-title">
+          <input
+            type="text"
+            className="timer-input"
+            value={h}
+            onChange={(e) => setTimer([e.target.value, m, s])}
+          />
+          <span>h</span>
+        </div>
+        <div className="timer-input-title">
+          <input
+            type="text"
+            className="timer-input"
+            value={m}
+            onChange={(e) => setTimer([h, e.target.value, s])}
+          />
+          <span>m</span>
+        </div>
+        <div className="timer-input-title">
+          <input
+            type="text"
+            className="timer-input"
+            value={s}
+            onChange={(e) => setTimer([h, m, e.target.value])}
+          />
+          <span>s</span>
+        </div>
+      </div>
       <div className="button-row">
         <Button onClickHandler={onReset}>Reset</Button>
         {isStarted ? (

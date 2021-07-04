@@ -5,7 +5,6 @@ import "./Stopwatch.css";
 const Stopwatch = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [[h, m, s], setTimer] = useState([0, 0, 0]);
-  const [laps, setLaps] = useState([{}]);
 
   useEffect(() => {
     const timerId = setInterval(() => onStart(), 1000);
@@ -23,49 +22,31 @@ const Stopwatch = () => {
     }
   };
 
-  const onPause = () => {
-    setIsStarted(false);
-  };
-
   const onReset = () => {
     setIsStarted(false);
     setTimer([0, 0, 0]);
   };
 
-  const onLapClick = () => {
-    let temp = [...laps];
-    const lastSplitTime = temp[temp.length - 1].splitTime;
-    const splitTime = new Date(0, 0, 0, 0).toTimeString();
-    const lapTime = Math.abs(new Date(splitTime) - new Date(lastSplitTime));
-    console.log(lapTime);
-    temp.push({
-      lapTime,
-      splitTime,
-    });
-    setLaps(temp);
-  };
-
   return (
     <div className="stopwatch">
       <div className="container">
-        <div className="clock">
-          {h}:{m}:{s}
-          <i className="fas fa-flag flagIcon" onClick={onLapClick}></i>
+        <div className="clock" onClick={() => setIsStarted(true)}>
+          <div className="clock-border-ring">
+            <div className="clock-border-ring-inner"></div>
+          </div>
+          <div className="clock-timer">
+            {h < 10 && 0}
+            {h}:{m < 10 && 0}
+            {m}:{s < 10 && 0}
+            {s}
+          </div>
         </div>
         <div className="button-row">
           <Button onClickHandler={onReset}>Reset</Button>
-          {isStarted ? (
-            <Button onClickHandler={onPause}>Pause</Button>
-          ) : (
-            <Button onClickHandler={() => setIsStarted(true)}>Start</Button>
-          )}
+          <Button onClickHandler={() => setIsStarted(!isStarted)}>
+            {isStarted ? <>Pause</> : <>Start</>}
+          </Button>
         </div>
-        {laps &&
-          laps.map((lap, index) => (
-            <p key={index}>
-              <span>{lap.lapTime}</span> <span>{lap.splitTime}</span>
-            </p>
-          ))}
       </div>
     </div>
   );
