@@ -4,21 +4,21 @@ import "./Stopwatch.css";
 
 const Stopwatch = () => {
   const [isStarted, setIsStarted] = useState(false);
-  const [[h, m, s], setTimer] = useState([0, 0, 0]);
+  const [[m, s, ms], setTimer] = useState([0, 0, 0]);
 
   useEffect(() => {
-    const timerId = setInterval(() => onStart(), 1000);
+    const timerId = setInterval(() => onStart(), 10);
     return () => clearInterval(timerId);
   });
 
   const onStart = () => {
     if (!isStarted) return;
-    if (m === 60 && s === 60) {
-      setTimer([h + 1, 0, 0]);
-    } else if (s === 60) {
-      setTimer([h, m + 1, 0]);
+    if (ms === 99 && s === 60) {
+      setTimer([m + 1, 0, 0]);
+    } else if (ms === 99) {
+      setTimer([m, s + 1, 0]);
     } else {
-      setTimer([h, m, s + 1]);
+      setTimer([m, s, ms + 1]);
     }
   };
 
@@ -35,10 +35,10 @@ const Stopwatch = () => {
             <div className="clock-border-ring-inner"></div>
           </div>
           <div className="clock-timer">
-            {h < 10 && 0}
-            {h}:{m < 10 && 0}
+            {m < 10 && 0}
             {m}:{s < 10 && 0}
-            {s}
+            {s}:{ms < 10 && 0}
+            {ms}
           </div>
         </div>
         <div className="button-row">

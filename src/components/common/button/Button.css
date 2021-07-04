@@ -3,9 +3,10 @@
   padding: 10px 25px;
   border-radius: 7px;
   font-weight: 500;
-  max-width: 27%;
   display: flex;
   justify-content: center;
+  min-width: 32%;
+  font-size: 1.1rem;
 }
 
 .buttons:hover {

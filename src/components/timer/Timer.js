@@ -41,7 +41,7 @@ const Timer = () => {
         </div>
         <div className="timer-input-title">
           <input
-            type="text"
+            type="number"
             className="timer-input"
             value={h}
             onChange={(e) => setTimer([e.target.value, m, s])}
@@ -50,7 +50,7 @@ const Timer = () => {
         </div>
         <div className="timer-input-title">
           <input
-            type="text"
+            type="number"
             className="timer-input"
             value={m}
             onChange={(e) => setTimer([h, e.target.value, s])}
@@ -59,7 +59,7 @@ const Timer = () => {
         </div>
         <div className="timer-input-title">
           <input
-            type="text"
+            type="number"
             className="timer-input"
             value={s}
             onChange={(e) => setTimer([h, m, e.target.value])}
